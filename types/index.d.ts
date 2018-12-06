@@ -10,35 +10,29 @@
  * replace all misc any types with proper types
  */
 
-declare module "vue2-leaflet" {
-  import Vue from "vue";
-  import { PropsDefinition } from "vue/types/options";
+declare module 'vue2-leaflet' {
+  import Vue from 'vue';
+  import { PropsDefinition } from 'vue/types/options';
+  import L from 'leaflet';
   // borrowed from https://github.com/vuejs/vue-class-component
   type VueClass<V> = {
     new (...args: any[]): V & Vue;
   } & typeof Vue;
   function Mixins<A>(CtorA: VueClass<A>): VueClass<A>;
-  function Mixins<A, B>(
-    CtorA: VueClass<A>,
-    CtorB: VueClass<B>
-  ): VueClass<A & B>;
-  function Mixins<A, B, C>(
-    CtorA: VueClass<A>,
-    CtorB: VueClass<B>,
-    CtorC: VueClass<C>
-  ): VueClass<A & B & C>;
+  function Mixins<A, B>(CtorA: VueClass<A>, CtorB: VueClass<B>): VueClass<A & B>;
+  function Mixins<A, B, C>(CtorA: VueClass<A>, CtorB: VueClass<B>, CtorC: VueClass<C>): VueClass<A & B & C>;
   function Mixins<A, B, C, D>(
     CtorA: VueClass<A>,
     CtorB: VueClass<B>,
     CtorC: VueClass<C>,
-    CtorD: VueClass<D>
+    CtorD: VueClass<D>,
   ): VueClass<A & B & C & D>;
   function Mixins<A, B, C, D, E>(
     CtorA: VueClass<A>,
     CtorB: VueClass<B>,
     CtorC: VueClass<C>,
     CtorD: VueClass<D>,
-    CtorE: VueClass<E>
+    CtorE: VueClass<E>,
   ): VueClass<A & B & C & D & E>;
   function Mixins<T>(...Ctors: VueClass<Vue>[]): VueClass<T>;
 
@@ -50,7 +44,7 @@ declare module "vue2-leaflet" {
     radius: number | null;
   }
   class Control extends Vue {
-    position: "topleft" | "topright" | "bottomleft" | "bottomright";
+    position: 'topleft' | 'topright' | 'bottomleft' | 'bottomright';
   }
   class GridLayer extends Mixins(Layer) {
     /**
@@ -447,29 +441,26 @@ declare module "vue2-leaflet" {
     getGeoJSONData(): any;
     getBounds(): any;
     setOptions(newVal: any, oldVal?: any): void;
-    setOptionsStyle(
-      newVal: object | Function | null,
-      oldVal?: object | Function | null
-    ): void;
+    setOptionsStyle(newVal: object | Function | null, oldVal?: object | Function | null): void;
   }
   class LIcon extends Mixins(Options) {
-      // props
-      iconUrl: String;
-      iconRetinaUrl: String;
-      iconSize: L.Point;
-      iconAnchor: L.Point;
-      popupAnchor: L.Point;
-      tooltipAnchor: L.Point;
-      shadowUrl: String;
-      shadowRetinaUrl: String;
-      shadowSize: L.Point;
-      shadowAnchor: L.Point;
-      bgPos: L.Point;
-      className: String;
+    // props
+    iconUrl: String;
+    iconRetinaUrl: String;
+    iconSize: L.Point;
+    iconAnchor: L.Point;
+    popupAnchor: L.Point;
+    tooltipAnchor: L.Point;
+    shadowUrl: String;
+    shadowRetinaUrl: String;
+    shadowSize: L.Point;
+    shadowAnchor: L.Point;
+    bgPos: L.Point;
+    className: String;
 
-      // data
-      iconObject: L.Icon;
-      parentContainer: L.Marker;
+    // data
+    iconObject: L.Icon;
+    parentContainer: L.Marker;
   }
 
   class LIconDefault extends Vue {
@@ -564,10 +555,7 @@ declare module "vue2-leaflet" {
 
     setCenter(newVal: L.LatLngExpression, oldVal?: L.LatLngExpression): void;
 
-    setBounds(
-      newVal: L.LatLngBoundsExpression,
-      oldVal?: L.LatLngBoundsExpression
-    ): void;
+    setBounds(newVal: L.LatLngBoundsExpression, oldVal?: L.LatLngBoundsExpression): void;
 
     setPaddingBottomRight(newVal: any[], oldVal?: any[]): void;
 
@@ -701,10 +689,11 @@ declare module "vue2-leaflet" {
     vueElement: Vue,
     leafletElement: L.Map,
     props: PropsDefinition<Record<string, any>>,
-    options?: any
+    options?: any,
   ): void;
 
   export {
+    L,
     findRealParent,
     propsBinder,
     LCircle,
@@ -728,6 +717,6 @@ declare module "vue2-leaflet" {
     LRectangle,
     LTileLayer,
     LTooltip,
-    LWMSTileLayer
+    LWMSTileLayer,
   };
 }
